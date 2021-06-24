@@ -3,7 +3,8 @@ from handle_messages import *
 import globalVariables
 from user import User
 
-TOKEN = 'ODU3NTY0MjIyNDI1OTIzNTk1.YNRa6w.rsNTdc4T4xPvPcw4H6DCOZ9m53I'
+with open("token.txt", 'r') as file:
+    TOKEN = file.read()
 
 client = discord.Client()
 UsersList = set()
@@ -26,6 +27,7 @@ async def on_message(message):
         await handleSettingsCommand(message)
     elif registeredUser and message.content[:4] == "rpg ":
         await handleRpgCommand(message)
+
 
 @client.event
 async def on_ready():
