@@ -3,7 +3,7 @@ from handle_messages import *
 import globalVariables
 from user import User
 
-TOKEN = 'ODU3NTY0MjIyNDI1OTIzNTk1.YNRa6w.NHyWhZmnoTuTOIj-0rNpHNpMig0'
+TOKEN = 'ODU3NTY0MjIyNDI1OTIzNTk1.YNRa6w.rsNTdc4T4xPvPcw4H6DCOZ9m53I'
 
 client = discord.Client()
 UsersList = set()
@@ -13,18 +13,19 @@ async def on_message(message):
     # we do not want the bot to reply to itself
     if message.author == client.user:
         return
-    if not message.content.startswith('rpgh '):
+    if (not message.content.startswith('rpgh ')) and (not message.content.startswith('rpg ')):
         return
-    else:
-        if message.content == "rpgh reg":
-            await registerNewUser(message)
-        elif User(message.author) not in globalVariables.UsersList:
-            await notRegisteredUser(message)
-        elif message.content[5:] in globalVariables.CommandsList:
-            await handleCommand(message)
-        else:
-            availableCommands = "\n".join(globalVariables.CommandsList)
-            await message.channel.send("Commnad {0} unrecognized!\nAvaliable commands are:\n {1}".format(message.content[5:], availableCommands))
+    registeredUser = (User(message.author) in globalVariables.UsersList)
+    print("New message, known user: {0}".format(str(registeredUser)))
+
+    if message.content == "rpgh reg":
+        await registerNewUser(message)
+    elif not registeredUser and message.content.startswith('rpgh '):
+        await notRegisteredUser(message)
+    elif registeredUser and message.content[:5] == "rpgh " and message.content[5:] in globalVariables.CommandsList:
+        await handleSettingsCommand(message)
+    elif registeredUser and message.content[:4] == "rpg ":
+        await handleRpgCommand(message)
 
 @client.event
 async def on_ready():
