@@ -1,0 +1,2 @@
+UsersList = []
+CommandsList = ["redirect msgs"]
