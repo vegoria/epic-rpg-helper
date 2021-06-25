@@ -20,7 +20,7 @@ class Reminders(object):
                                 dungeon=0)
         self.lastWorkCommand = "CHOP"
         self.timeReduction = Tier0Cooldowns
-    
+   
     def secondElapsed():
         availableCommands = []
         for key in self.reminders.keys:
@@ -33,7 +33,7 @@ class Reminders(object):
     def commandUsed(self, command):
         if self.reminders[command] > 0:
             return
-        if command not in ["daily", "weekly", "lootbox","vote", "duel"]:
+        if command not in ["daily", "weekly", "lootbox", "vote", "duel"]:
             self.reminders[command] = StandardCooldowns[command] * self.timeReduction
         else:
             self.reminders[command] = StandardCooldowns[command]

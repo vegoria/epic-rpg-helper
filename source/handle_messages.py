@@ -49,7 +49,7 @@ async def handleSettingsCommand(message):
 async def handleRpgCommand(message):
     print("In handle RPG command")
     rpgCommand = message.content[4:].strip()
-    author  = globalFunctions.findUser(User(message.author))
+    author     = globalFunctions.findUser(User(message.author))
     commandFamily = globalFunctions.getRpgCommandFamily(rpgCommand)
     await author.getMessagesChannel().send("You have used {0} command!".format(commandFamily))
     return

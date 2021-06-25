@@ -1,18 +1,20 @@
 UsersList = []
-CommandsList = ["redirect msgs",
-                "set donor tier 0",
-                "set donor tier 1",
-                "set donor tier 2",
-                "set donor tier 3",
-                "enable reminders",
-                "disable reminders"]
+CommandsList = [
+            "redirect msgs",
+            "set donor tier 0",
+            "set donor tier 1",
+            "set donor tier 2",
+            "set donor tier 3",
+            "enable reminders",
+            "disable reminders"]
 
-rpgCommands =["daily",
+rpgCommands = [
+            "daily",
             "weekly",
             "lootbox",
             "vote",
             "duel"]
-rpgHuntCommands =[
+rpgHuntCommands = [
             "hunt",
             "hunt t",
             "hunt together",
