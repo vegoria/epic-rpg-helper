@@ -1,3 +1,4 @@
+import asyncio
 import discord
 from discord import user
 import globalVariables
@@ -51,5 +52,10 @@ async def handleRpgCommand(message):
     rpgCommand = message.content[4:].strip()
     author     = globalFunctions.findUser(User(message.author))
     commandFamily = globalFunctions.getRpgCommandFamily(rpgCommand)
+    print("Command family " + commandFamily)
+    print("Cooldowns: " + str(cooldowns.StandardCooldowns["{0}".format(commandFamily)]))
+    cooldown = cooldowns.StandardCooldowns["{0}".format(commandFamily)]
     await author.getMessagesChannel().send("You have used {0} command!".format(commandFamily))
+    await asyncio.sleep(cooldown)
+    await author.getMessagesChannel().send("{0.author.mention} You can use {1} command again".format(message, commandFamily))
     return
