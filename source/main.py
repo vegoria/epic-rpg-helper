@@ -1,6 +1,9 @@
+from asyncio.events import Handle
 import discord
+import asyncio
 from handle_messages import *
 import globalVariables
+import cooldowns
 from user import User
 
 with open("token.txt", 'r') as file:
@@ -27,7 +30,6 @@ async def on_message(message):
         await handleSettingsCommand(message)
     elif registeredUser and message.content[:4] == "rpg ":
         await handleRpgCommand(message)
-
 
 @client.event
 async def on_ready():
